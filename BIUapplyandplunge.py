@@ -53,7 +53,7 @@ if __name__=='__main__':
     args = parser.parse_args()
     
     # Default timing
-    #cannontimetoreverse = 0.020
+    #cannontimetoreverse = 0.0200
     #cannonreversedelay  = args.stime + args.sdelay+ cannontimetoreverse
 
 
