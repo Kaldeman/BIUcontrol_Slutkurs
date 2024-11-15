@@ -2,7 +2,10 @@
 
 from guizero import App, TextBox, Text, PushButton, CheckBox
 from subprocess import call, Popen
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except:
+    import Mock.GPIO as GPIO
 import BIUpinlist as pin
 
 def startprocess():
@@ -43,7 +46,26 @@ def pedal():
     if button_start.enabled and GPIO.input(pin.pedalsensor)==0:
         print("Pedal triggered")
         startprocess()
+        
+def powerupee():
+    print("Power up")
+    arguments = ["python3","BIUpowerupdown.py","--updown","up"]
+    call(arguments)
+    button_start.enable()
+    
+def powerdownee():
+    print("Power down")
+    arguments = ["python3","BIUpowerupdown.py","--updown","down"]
+    call(arguments)
+    button_start.disable()
 
+def blotplunge():
+    print("Starting blot and plunge")
+    plungedelay      = str(float(pdelay.value)/1000)
+    retractiondelay  = str(float(rdelay.value)/1000)
+    arguments = ["python3","BIUapplyandplunge.py","--stime","0","--rdelay",retractiondelay,"--pdelay",plungedelay, "--startblot"]
+    call(arguments)    
+    
     
 app = App(title="Back-it-up", layout="grid")
 stimelabel  = Text(app, text="Spray time (msec)", grid=[0,1])
@@ -60,6 +82,7 @@ donotplunge = CheckBox(app, text="Do not plunge", grid=[0,4])
 button_up   = PushButton(app, command=powerup,text="Ready", grid=[0,5])
 button_down = PushButton(app, command=powerdown, text="Abort", grid=[1,5])
 button_start= PushButton(app, command=startprocess, text="Spray & Plunge", grid=[0,6])
+button_blot_plunge= PushButton(app, command=blotplunge, text="Blot & Plunge", grid=[1,6])
 button_up.bg="orange"
 button_start.bg = "red"
 button_start.disable()

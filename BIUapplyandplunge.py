@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
 # Uncomment for use of pi
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except:
+    import Mock.GPIO as GPIO
 #import Adafruit_DHT
 import time, threading
 import argparse
@@ -9,7 +12,7 @@ import sys, select
 import BIUpinlist as pin
 
 def filterforward(filterposition):
-    print("Advancing the cannon")
+    print("Advancing the cannon at %5.3fs" % (time.time()-init_time))
     GPIO.output(filterposition,GPIO.HIGH)
 
 def powerupsensors(sensorpower):
@@ -20,7 +23,7 @@ def powerdownsensors(sensorpower):
     
 def filterreverse(filterposition,filterreversedelay):
     time.sleep(filterreversedelay)
-    print("reversing the filter")
+    print("reversing the filter at %5.3fs" % (time.time()-init_time))
     GPIO.output(filterposition,GPIO.LOW)
 
 def applysample(cannon,duration):
@@ -30,7 +33,7 @@ def applysample(cannon,duration):
     
 def releaseplunger(plunger,wait):
     time.sleep(wait)
-    print("releasing the plunger")
+    print("releasing the plunger at %5.3fs" % (time.time()-init_time))
     GPIO.output(plunger,GPIO.HIGH)
 
 def resetplunger(plunger):
@@ -45,7 +48,8 @@ if __name__=='__main__':
     parser.add_argument('--stime',      help='Duration of sample application (seconds)',type=float,required=True)
     parser.add_argument('--rdelay',     help='Time to wait before retracting filter (seconds)',default = 0, type=float,required=False)
     parser.add_argument('--pdelay',     help='Time to wait before plunging (seconds)',default = 0, type=float,required=False)
-    parser.add_argument('--donotplunge',help='Do not fire the plunger (diagnostic)',action = 'store_true')  
+    parser.add_argument('--donotplunge',help='Do not fire the plunger (diagnostic)',action = 'store_true')
+    parser.add_argument('--startblot',help='Start by blotting the sample',action = 'store_true')     
     args = parser.parse_args()
     
     # Default timing
@@ -68,7 +72,12 @@ if __name__=='__main__':
 #    print('Temp={0:0.1f}\'C  Humidity={1:0.1f}% RH'.format(temperature, humidity))
 
     # Display timing and avoid crash
+
     print("Timings:")
+    if args.startblot:
+        # We need to call powerupsensors here because we're not calling "Ready"
+        powerupsensors(pin.sensorpower)
+        print("Filter will advanced at time: 0")    
     print("Specimen application will start at time: 0")
     print("Specimen application will end at time: ",args.stime)
     print("Filter will retract at time: ",args.rdelay)
@@ -90,13 +99,18 @@ if __name__=='__main__':
     else:
         print("Safety interlock pass: cryogen container is in place")
 
+    
     # set up processes
+    blot = threading.Thread(target=filterforward, args=(pin.filterposition,))
     sample = threading.Thread(target=applysample, args=(pin.cannon,args.stime))
     filterposition = threading.Thread(target=filterreverse, args=(pin.filterposition,args.rdelay))
     plunger = threading.Thread(target=releaseplunger, args=(pin.plunger,args.pdelay))  
 
-    
+    init_time = time.time()
     # start processes
+    if args.startblot:
+        blot.start()
+
     if not args.donotplunge:
         plunger.start()
         

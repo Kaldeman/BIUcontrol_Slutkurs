@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
 # Uncomment for use of pi
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except:
+    import Mock.GPIO as GPIO
 import time, threading
 import argparse
 import sys, select
 import BIUpinlist as pin
+
 
 def filterforward(filterposition):
     print("Advancing the filter")
@@ -51,5 +55,7 @@ if __name__=='__main__':
     elif args.updown == 'down':
         powerdownsensors(pin.sensorpower)
         filterreverse(pin.filterposition,0)
+    elif args.updown == 'fle':
+        powerupsensors(pin.sensorpower)
     print("Done!")
 
