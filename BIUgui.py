@@ -2,6 +2,7 @@
 
 from guizero import App, TextBox, Text, PushButton, CheckBox
 from subprocess import call, Popen
+#Download Mock.GPIO if working on non-RPi system! This will test wether or not to use the real or simulated Pi
 try:
     import RPi.GPIO as GPIO
 except:

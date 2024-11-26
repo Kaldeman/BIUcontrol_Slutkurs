@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-import RPi.GPIO as GPIO
+
+#Download Mock.GPIO if working on non-RPi system! This will test wether or not to use the real or simulated Pi
+try:
+    import RPi.GPIO as GPIO
+except:
+    import Mock.GPIO as GPIO
 import time, argparse
 import BIUpinlist as pin
 

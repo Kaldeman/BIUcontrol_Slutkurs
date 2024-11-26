@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 
 # Uncomment for use of pi
-import RPi.GPIO as GPIO
+#Download Mock.GPIO if working on non-RPi system! This will test wether or not to use the real or simulated Pi
+try:
+    import RPi.GPIO as GPIO
+except:
+    import Mock.GPIO as GPIO
 #import Adafruit_DHT
 import time, threading
 import argparse

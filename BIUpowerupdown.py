@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # Uncomment for use of pi
+#Download Mock.GPIO if working on non-RPi system! This will test wether or not to use the real or simulated Pi
 try:
     import RPi.GPIO as GPIO
 except:
