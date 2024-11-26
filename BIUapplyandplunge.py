@@ -88,9 +88,11 @@ if __name__=='__main__':
     energizedtime = kuhnketime+max(args.pdelay,args.stime,args.rdelay)
     print("Plunger will remain energized until: ",energizedtime)
     print("Program will exit after: ",1+energizedtime)
-    #if cannonreversedelay > args.pdelay:
-    #    print("The cannon does not have sufficient time to reverse before plunging!!")
-    #    exit()
+#NOTE Currently lacking GUI popup, add to BUIgui.py
+    if args.rdelay > args.pdelay:
+        print("The cannon does not have sufficient time to reverse before plunging!!")
+        exit()
+
 
     # Check interlock
     if GPIO.input(pin.interlock)==1:
