@@ -52,7 +52,7 @@ def powerupee():
     print("Power up")
     arguments = ["python3","BIUpowerupdown.py","--updown","up"]
     call(arguments)
-    button_start.enable()
+    #button_start.enable()  NOTE Enable if spray is installed
     
 def powerdownee():
     print("Power down")
@@ -121,11 +121,12 @@ button_up.bg="orange"
 button_start.bg = "red"
 button_start.disable()
 
-cleancycleslabel = Text(app, text="Cleaning cycles", grid=[3,1]) # DEACTIVATED
-cleancycles      = TextBox(app, text="5",grid=[4,1])   
-cleantimelabel   = Text(app, text="Cleaning pulse (msec)", grid=[3,2])
-cleantime        = TextBox(app, text="200",grid=[4,2]) 
-clean            = PushButton(app, command=cleanprocess, text="Clean", grid=[3,5])
+# ---------------------------------------DEACTIVATED----------------------------------------------
+#cleancycleslabel = Text(app, text="Cleaning cycles", grid=[3,1]) 
+#cleancycles      = TextBox(app, text="5",grid=[4,1])   
+#cleantimelabel   = Text(app, text="Cleaning pulse (msec)", grid=[3,2])
+#cleantime        = TextBox(app, text="200",grid=[4,2]) 
+#clean            = PushButton(app, command=cleanprocess, text="Clean", grid=[3,5])
 
 lamp_onoff = PushButton(app, command=lamp_one, text = 'Lamp OFF', grid = [0,8])
 lamp_green = PushButton(app, command=greenlight, text = 'Lamp Green', grid = [0,9])
