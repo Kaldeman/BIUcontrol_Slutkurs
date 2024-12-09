@@ -15,9 +15,9 @@ def startprocess():
     retractiondelay  = str(float(rdelay.value)/1000)
     plungedelay      = str(float(pdelay.value)/1000)
     arguments = ["python3","BIUapplyandplunge.py","--stime",spraytime,"--rdelay",retractiondelay,"--pdelay",plungedelay]
+    call(arguments)
     if donotplunge.value==1:
         arguments.append("--donotplunge")
-    call(arguments)
     button_start.disable()
     
 def powerup():
