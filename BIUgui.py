@@ -18,19 +18,19 @@ def startprocess():
     if donotplunge.value==1:
         arguments.append("--donotplunge")
     call(arguments)
-    button_start.disable()
+    #button_start.disable()
     
 def powerup():
     print("Power up")
     arguments = ["python3","BIUpowerupdown.py","--updown","up"]
     call(arguments)
-    button_start.enable()
+    #button_start.enable()
     
 def powerdown():
     print("Power down")
     arguments = ["python3","BIUpowerupdown.py","--updown","down"]
     call(arguments)
-    button_start.disable()
+    #button_start.disable()
     
 def cleanprocess(): # DEACTIVATED: This process is currently not being used for the plunger, it is meant to clean the spray nozzle. 
     print("starting clean process")
@@ -42,23 +42,23 @@ def cleanprocess(): # DEACTIVATED: This process is currently not being used for 
     Popen(arguments)
     #call(["python3","cleancontrol.py","--stime",stime,"--cycles",cycles])
 
-def pedal(): # Currently not being used!
+"""def pedal(): # Currently not being used!
     GPIO.setup(pin.pedalsensor,GPIO.IN, pull_up_down = GPIO.PUD_UP)
     if button_start.enabled and GPIO.input(pin.pedalsensor)==0:
         print("Pedal triggered")
         startprocess()
-        
+"""        
 def powerupee():
     print("Power up")
     arguments = ["python3","BIUpowerupdown.py","--updown","up"]
     call(arguments)
-    button_start.enable()
+    #button_start.enable()
     
 def powerdownee():
     print("Power down")
     arguments = ["python3","BIUpowerupdown.py","--updown","down"]
     call(arguments)
-    button_start.disable()
+    #button_start.disable()
 
 def blotplunge():
     print("Starting blot and plunge")
@@ -116,10 +116,10 @@ donotplunge = CheckBox(app, text="Do not plunge", grid=[0,4])
 button_up   = PushButton(app, command=powerup,text="Ready", grid=[0,5])
 button_down = PushButton(app, command=powerdown, text="Abort", grid=[1,5])
 button_blot_plunge= PushButton(app, command=blotplunge, text="Blot & Plunge", grid=[0,6])
-button_start= PushButton(app, command=startprocess, text="Spray & Plunge", grid=[1,6])
+#button_start= PushButton(app, command=startprocess, text="Spray & Plunge", grid=[1,6])
 button_up.bg="orange"
-button_start.bg = "red"
-button_start.disable()
+#button_start.bg = "red"
+#button_start.disable()
 
 cleancycleslabel = Text(app, text="Cleaning cycles", grid=[3,1]) # DEACTIVATED
 cleancycles      = TextBox(app, text="5",grid=[4,1])   
