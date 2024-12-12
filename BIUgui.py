@@ -130,11 +130,11 @@ clean            = PushButton(app, command=cleanprocess, text="Clean", grid=[3,5
 lamp_onoff = PushButton(app, command=lamp_one, text = 'Lamp OFF', grid = [0,8])
 lamp_green = PushButton(app, command=greenlight, text = 'Lamp Green', grid = [0,9])
 lamp_blue = PushButton(app, command=bluelight, text = 'Lamp Blue', grid = [1,9])
-lamp_red = PushButton(app, command=redlight, text = 'Lamp Red', grid = [0,10])
+lamp_red = PushButton(app, command=redlight, text = 'Lamp Red', grid = [3,9])
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-app.repeat(100,pedal)
+#app.repeat(100,pedal)
 app.display()
 
 
