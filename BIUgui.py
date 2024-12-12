@@ -104,9 +104,9 @@ def lamp_off():
     
 app = App(title="Back-it-up", layout="grid")
 rdelaylabel = Text(app, text="Retraction delay (msec)", grid=[0,1])
-rdelay      = TextBox(app, grid=[1,1], text="50")
+rdelay      = TextBox(app, grid=[1,1], text="1000")
 pdelaylabel = Text(app, text="Plunge delay (msec)", grid=[0,2])
-pdelay      = TextBox(app, grid=[1,2], text="50")
+pdelay      = TextBox(app, grid=[1,2], text="2000")
 #stimelabel  = Text(app, text="Spray time (msec)", grid=[0,3]) #DEACTIVATED: No spray nozzle currently installed
 #stime       = TextBox(app, grid=[1,3], text="30")
 
@@ -121,11 +121,11 @@ button_up.bg="orange"
 #button_start.bg = "red"
 #button_start.disable()
 
-cleancycleslabel = Text(app, text="Cleaning cycles", grid=[3,1]) # DEACTIVATED
-cleancycles      = TextBox(app, text="5",grid=[4,1])   
-cleantimelabel   = Text(app, text="Cleaning pulse (msec)", grid=[3,2])
-cleantime        = TextBox(app, text="200",grid=[4,2]) 
-clean            = PushButton(app, command=cleanprocess, text="Clean", grid=[3,5])
+#cleancycleslabel = Text(app, text="Cleaning cycles", grid=[3,1]) # DEACTIVATED
+#cleancycles      = TextBox(app, text="5",grid=[4,1])   
+#cleantimelabel   = Text(app, text="Cleaning pulse (msec)", grid=[3,2])
+#cleantime        = TextBox(app, text="200",grid=[4,2]) 
+#clean            = PushButton(app, command=cleanprocess, text="Clean", grid=[3,5])
 
 lamp_onoff = PushButton(app, command=lamp_one, text = 'Lamp OFF', grid = [0,8])
 lamp_green = PushButton(app, command=greenlight, text = 'Lamp Green', grid = [0,9])
