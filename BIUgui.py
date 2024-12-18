@@ -129,12 +129,9 @@ button_up.bg="orange"
 
 lamp_onoff = PushButton(app, command=lamp_one, text = 'Lamp OFF', grid = [0,8])
 lamp_green = PushButton(app, command=greenlight, text = 'Lamp Green(520nm)', grid = [0,9])
-lamp_blue = PushButton(app, command=bluelight, text = 'Lamp Blue', grid = [1,9])
-<<<<<<< HEAD
+lamp_blue = PushButton(app, command=bluelight, text = 'Lamp Blue(447nm)', grid = [1,9])
 lamp_red = PushButton(app, command=redlight, text = 'Lamp Red(622nm)', grid = [0,10])
-=======
-lamp_red = PushButton(app, command=redlight, text = 'Lamp Red', grid = [3,9])
->>>>>>> 8c699c2673298f63252157938b409f691ff4f291
+
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
